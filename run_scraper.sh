@@ -34,6 +34,9 @@ echo "========================================" >> "$LOG_DIR/cron_$(date +%Y%m%d
 echo "Scraper started at: $(date)" >> "$LOG_DIR/cron_$(date +%Y%m%d).log"
 echo "========================================" >> "$LOG_DIR/cron_$(date +%Y%m%d).log"
 
+# Scraper writes to same table N8n reads
+export SUPABASE_TABLE=globe_sku
+
 # Run scraper with logging
 python main.py >> "$LOG_DIR/cron_$(date +%Y%m%d).log" 2>&1
 

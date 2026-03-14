@@ -1,17 +1,23 @@
 import requests
 from bs4 import BeautifulSoup
 import csv
+import json
 import re
+import sys
 import time
 import os
 import pandas as pd
 from datetime import datetime
+from pathlib import Path
 import psycopg2
 from psycopg2.extras import execute_values
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
+
+# Path to cookies file (same directory as this script)
+COOKIES_FILE = Path(__file__).resolve().parent / "cookies.json"
 
 def convert_cookies(cookie_list):
     """Convert cookie list from JSON format to requests cookies dict"""
@@ -264,51 +270,22 @@ def main():
     clear_database()
     print()
     
-    # Define cookies
-    cookies_json = [
-        {
-            "domain": "globepestsolutions.com.au",
-            "expirationDate": 1795169634.903568,
-            "hostOnly": True,
-            "httpOnly": False,
-            "name": "private_content_version",
-            "path": "/",
-            "sameSite": "lax",
-            "secure": True,
-            "session": False,
-            "storeId": None,
-            "value": "a6161d27118097280a9f95b01ff6abd2"
-        },
-        {
-            "domain": "globepestsolutions.com.au",
-            "expirationDate": 1760613238.125362,
-            "hostOnly": True,
-            "httpOnly": True,
-            "name": "X-Magento-Vary",
-            "path": "/",
-            "sameSite": "lax",
-            "secure": True,
-            "session": False,
-            "storeId": None,
-            "value": "180fe87cb4ab2ad02d8269c19f79d5ee002eb527c9653c18b8f2ae41fb8f0526"
-        },
-        {
-            "domain": "globepestsolutions.com.au",
-            "expirationDate": 1760611438.123913,
-            "hostOnly": True,
-            "httpOnly": True,
-            "name": "persistent_shopping_cart",
-            "path": "/",
-            "sameSite": "lax",
-            "secure": True,
-            "session": False,
-            "storeId": None,
-            "value": "7JBLBYlNsdZzkaCgHviQVkseMeX2RhiY4A6Bis7X4oK1KPsURN"
-        }
-    ]
-    
-    # Convert cookies
-    cookies = convert_cookies(cookies_json)
+    # Load cookies from file
+    if not COOKIES_FILE.exists():
+        print(f"❌ Error: cookies file not found: {COOKIES_FILE}")
+        print("   Create cookies.json in the same directory as main.py (e.g. copy from globe_cookies.json).")
+        sys.exit(1)
+    try:
+        with open(COOKIES_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        cookies_list = data if isinstance(data, list) else data.get("cookies", data)
+        if not cookies_list or not isinstance(cookies_list, list):
+            print("❌ Error: cookies.json must contain a JSON array of cookie objects (with 'name' and 'value').")
+            sys.exit(1)
+    except json.JSONDecodeError as e:
+        print(f"❌ Error: invalid JSON in {COOKIES_FILE}: {e}")
+        sys.exit(1)
+    cookies = convert_cookies(cookies_list)
     
     # Create session with cookies and headers
     session = requests.Session()

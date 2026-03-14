@@ -1,0 +1,74 @@
+[
+  {
+    "domain": "globepestsolutions.com.au",
+    "name": "PHPSESSID",
+    "value": "80424e46efff7584b212c35f09ea73e3",
+    "path": "/",
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "lax"
+  },
+  {
+    "domain": "globepestsolutions.com.au",
+    "name": "form_key",
+    "value": "RcWEBXVCB7UBC9gK",
+    "path": "/",
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "lax"
+  },
+  {
+    "domain": "globepestsolutions.com.au",
+    "name": "private_content_version",
+    "value": "e96c593a339fb80f895930eb072ae516",
+    "path": "/",
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "lax"
+  },
+  {
+    "domain": "globepestsolutions.com.au",
+    "name": "X-Magento-Vary",
+    "value": "180fe87cb4ab2ad02d8269c19f79d5ee002eb527c9653c18b8f2ae41fb8f0526",
+    "path": "/",
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "lax"
+  },
+  {
+    "domain": "globepestsolutions.com.au",
+    "name": "persistent_shopping_cart",
+    "value": "gvkGqY2Atcf17Nv4kviNowocQaV7t9q2wATvXdiB0P0UvJr5Fx",
+    "path": "/",
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "lax"
+  },
+  {
+    "domain": "globepestsolutions.com.au",
+    "name": "X-Customer-Price-List-Id",
+    "value": "22",
+    "path": "/",
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "lax"
+  },
+  {
+    "domain": "globepestsolutions.com.au",
+    "name": "X-Customer-Type",
+    "value": "3",
+    "path": "/",
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "lax"
+  },
+  {
+    "domain": "globepestsolutions.com.au",
+    "name": "wp_ga4_customerGroup",
+    "value": "General",
+    "path": "/",
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "lax"
+  }
+]
